@@ -10,18 +10,18 @@ base_url = "https://www.radioreference.com"
 
 
 class SystemScraper(Scraper):
-    def __init__(self, url: str, outdir: str = None):
-        super().__init__(url, outdir)
+    def __init__(self, url: str, out_dir: str = None):
+        super().__init__(url, out_dir)
 
     def scrape(self):
         super().scrape()
         self._export_details()
         self._export_sites_and_freqs()
-        os.mkdir(f"{self.outdir}/talkgroups")
+        os.mkdir(f"{self.out_dir}/talkgroups")
         self._export_talkgroups()
 
     def _export_details(self):
-        with open(f"{self.outdir}/details.csv", "w") as file:
+        with open(f"{self.out_dir}/details.csv", "w") as file:
             csvwriter = csv.writer(file)
             csvwriter.writerow(
                 [
@@ -51,7 +51,7 @@ class SystemScraper(Scraper):
         header = self.soup.find("h3", string="Sites and Frequencies")
         table = header.find_next("table")
         rows = table.find_all("tr")
-        with open(f"{self.outdir}/sites_and_freqs.csv", "w") as file:
+        with open(f"{self.out_dir}/sites_and_freqs.csv", "w") as file:
             csvwriter = csv.writer(file)
             csvwriter.writerow(["RFSS", "Site", "Name", "County", "Freqs", "NAC"])
             last_row = None
@@ -95,7 +95,7 @@ class SystemScraper(Scraper):
             table = header.find_next("table")
             rows = table.find_all("tr")
             with open(
-                f"{self.outdir}/talkgroups/{to_filename(header_text)}.csv", "w"
+                f"{self.out_dir}/talkgroups/{to_filename(header_text)}.csv", "w"
             ) as file:
                 csvwriter = csv.writer(file)
                 csvwriter.writerow(

@@ -5,8 +5,8 @@ from formatter import Formatter
 
 
 class Op25Formatter(Formatter):
-    def __init__(self, indir: str):
-        super().__init__(indir, f"{indir}/op25")
+    def __init__(self, in_dir: str):
+        super().__init__(in_dir, f"{in_dir}/op25")
         self._load_sites_and_freqs()
 
     def format(self):
@@ -16,7 +16,7 @@ class Op25Formatter(Formatter):
 
     def _load_sites_and_freqs(self):
         sites_and_freqs = []
-        with open(f"{self.indir}/sites_and_freqs.csv", newline="") as file:
+        with open(f"{self.in_dir}/sites_and_freqs.csv", newline="") as file:
             csvreader = csv.DictReader(file)
             for row in csvreader:
                 # Get only control channels (ending in "c")
@@ -29,18 +29,18 @@ class Op25Formatter(Formatter):
         self.sites_and_freqs = sites_and_freqs
 
     def _generate_tgids_file(self):
-        with open(f"{self.outdir}/tgids.tsv", "w", newline="") as outfile:
+        with open(f"{self.out_dir}/tgids.tsv", "w", newline="") as outfile:
             writer = csv.writer(outfile, delimiter="\t", quoting=csv.QUOTE_ALL)
-            for filename in os.listdir(f"{self.indir}/talkgroups"):
-                with open(f"{self.indir}/talkgroups/{filename}", newline="") as infile:
+            for filename in os.listdir(f"{self.in_dir}/talkgroups"):
+                with open(f"{self.in_dir}/talkgroups/{filename}", newline="") as infile:
                     reader = csv.DictReader(infile)
                     for row in reader:
                         text = f"{row['Alpha Tag']}: {row['Description']}"
                         writer.writerow([row["DEC"], text])
 
     def _generate_trunk_file(self):
-        siteIdx = self._prompt_for_site()
-        site_id, site_name, county, control_freqs, nac = self.sites_and_freqs[siteIdx]
+        site_idx = self._prompt_for_site()
+        site_id, site_name, county, control_freqs, nac = self.sites_and_freqs[site_idx]
         nac_int = int(nac, 16)
         control_channels = ",".join(control_freqs)
         header = [
@@ -65,7 +65,7 @@ class Op25Formatter(Formatter):
             "",
             "",
         ]
-        with open(f"{self.outdir}/trunk.tsv", "w", newline="") as tsvfile:
+        with open(f"{self.out_dir}/trunk.tsv", "w", newline="") as tsvfile:
             writer = csv.writer(tsvfile, delimiter="\t", quoting=csv.QUOTE_ALL)
             writer.writerow(header)
             writer.writerow(data)

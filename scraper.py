@@ -5,10 +5,10 @@ import time
 
 
 class Scraper:
-    def __init__(self, url: str, outdir: str = None):
+    def __init__(self, url: str, out_dir: str = None):
         html = requests.get(url).text
         self.soup = bs4.BeautifulSoup(html, "html.parser")
-        self.outdir = f"data/{outdir or str(time.time())}"
+        self.out_dir = f"data/{out_dir or str(time.time())}"
 
     def scrape(self):
-        os.makedirs(self.outdir, exist_ok=True)
+        os.makedirs(self.out_dir, exist_ok=True)
