@@ -1,19 +1,23 @@
-from argparse import ArgumentParser
+import argparse
 
 from op25formatter import Op25Formatter
 from systemscraper import SystemScraper
 
 if __name__ == "__main__":
-    parser = ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Scrape Radio Reference and optionally export for OP25.",
+        epilog="Example:\n  python main.py --url https://www.radioreference.com/db/sid/6253 --op25",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
     parser.add_argument("--url", help="Radio Reference URL", required=True)
-    parser.add_argument("--out_dir", help="Name of out directory")
-    parser.add_argument("--format", help="Data format")
+    parser.add_argument("--out_dir", help="Name of output directory")
+    parser.add_argument("--op25", help="Export for OP25", action="store_true")
     args = parser.parse_args()
 
     if "/sid" in args.url:
         scraper = SystemScraper(args.url, args.out_dir)
         scraper.scrape()
-        if args.format == "op25":
+        if args.op25:
             Op25Formatter(scraper.out_dir).format()
         print(f"Exported to {scraper.out_dir}")
     else:
