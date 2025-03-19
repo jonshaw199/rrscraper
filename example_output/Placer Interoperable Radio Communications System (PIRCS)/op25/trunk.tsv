@@ -1,0 +1,2 @@
+"Sysname"	"Control Channel List"	"Offset"	"NAC"	"Modulation"	"TGID Tags File"	"Whitelist"	"Blacklist"	"Center Frequency"
+"I-80 Corridor Simulcast (Placer, CA; 002 (2))"	"152.0225,152.0375,161.8875,161.9125"	"0"	"722"	"cqpsk"	"tgids.tsv"	""	""	""

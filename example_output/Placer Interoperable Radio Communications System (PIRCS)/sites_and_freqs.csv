@@ -1,0 +1,6 @@
+RFSS,Site,Name,County,Freqs,NAC
+1 (1),001 (1),West Basin Simulcast,"Placer, CA","161.800c,161.8125c,161.825c,161.8375c,161.850,161.875",2D0
+1 (1),002 (2),I-80 Corridor Simulcast,"Placer, CA","152.0225c,152.0375c,152.0825,161.8875c,161.9125c",2D2
+1 (1),003 (3),Tahoe Basin Simulcast,"Placer, CA","152.0525c,152.0675c,152.1125,152.1275c",2D3
+1 (1),004 (4),Genoa Peak,"Douglas, NV","152.0825,152.1425c,152.1575c,161.8375c",2D4
+1 (1),005 (5),Signal Peak,"Nevada, CA","152.0975c,152.1725c,152.1875c,152.6675",2D5

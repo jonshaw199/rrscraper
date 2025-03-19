@@ -1,0 +1,12 @@
+DEC,HEX,Mode,Alpha Tag,Description,Tag
+101,065,D,PC Admin Svcs,Administrative Services,Public Works
+102,066,D,PC Telecom,Telecommunications Services,Public Works
+901,385,D,PC OES,Office of Emergency Services,Emergency Ops
+1201,4b1,D,PC Parks 1,Parks 1,Public Works
+1202,4b2,D,PC Parks 2,Parks 2,Public Works
+1421,58d,D,PC AC,Animal Control,Public Works
+1901,76d,D,PC Roads 1,Roads 1,Public Works
+1902,76e,D,PC Roads 2,Roads 2,Public Works
+1911,777,D,PC Transit 1,Transit 1,Transportation
+1912,778,D,PC Transit 2,Transit 2,Transportation
+1913,779,D,TART,Tahoe Truckee Area Regional Transit,Transportation

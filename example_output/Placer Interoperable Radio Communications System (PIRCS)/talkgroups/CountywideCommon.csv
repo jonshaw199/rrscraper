@@ -1,0 +1,8 @@
+DEC,HEX,Mode,Alpha Tag,Description,Tag
+1,001,D,County Disp,County Dispatch (Local Government to PCSO Dispatch),Interop
+11,00b,D,Countywide 1,Countywide 1,Interop
+12,00c,D,Countywide 2,Countywide 2,Interop
+13,00d,D,Countywide 3,Countywide 3,Interop
+14,00e,D,Countywide 4,Countywide 4,Interop
+15,00f,D,Countywide 5,Countywide 5,Interop
+61,03d,D,Events 1,Events 1,Interop

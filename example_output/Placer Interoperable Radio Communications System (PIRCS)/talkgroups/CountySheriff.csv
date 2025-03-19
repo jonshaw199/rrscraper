@@ -1,0 +1,6 @@
+DEC,HEX,Mode,Alpha Tag,Description,Tag
+2001,7d1,D,PCSO Disp 1,West Dispatch (patched with 160.545),Law Dispatch
+2002,7d2,D,PCSO Disp 2,West Tac,Law Tac
+2003,7d3,D,PCSO Disp 3,East Dispatch (patched with 161.505),Law Dispatch
+2004,7d4,D,PCSO Disp 4,East Tac,Law Tac
+2005,7d5,DE,PCSO Disp 5,Dispatch 5,Law Talk
