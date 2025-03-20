@@ -21,5 +21,11 @@ class Scraper:
     def _get_text_from_tag(self, tag: bs4.Tag | None) -> str:
         if not tag:
             return ""
-        text = tag.find(text=True, recursive=False)
-        return text.strip() if text else ""
+
+        shallow_text = tag.find(text=True, recursive=False)
+        if shallow_text:
+            return shallow_text.strip()
+
+        # No shallow text — fall back to all text (deep)
+        deep_text = tag.get_text(strip=True)
+        return deep_text

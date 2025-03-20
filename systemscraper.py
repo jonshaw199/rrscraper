@@ -48,7 +48,7 @@ class SystemScraper(Scraper):
         th_tag = (soup or self._soup).find("th", string=label)
         if th_tag:
             td_tag = th_tag.find_next("td")
-            return td_tag.text.strip() if td_tag else ""
+            return self._get_text_from_tag(td_tag)
         return ""
 
     def __export_sites_and_freqs(self):
@@ -60,7 +60,7 @@ class SystemScraper(Scraper):
         # Map column names to their indices
         column_indices = {}
         for idx, th in enumerate(header_items):
-            column_name = th.text.strip()
+            column_name = self._get_text_from_tag(th)
             if column_name:
                 column_indices[column_name] = idx
 
@@ -69,13 +69,13 @@ class SystemScraper(Scraper):
             csvwriter = csv.writer(file)
 
             # Write the header row, including "NAC"
-            header_texts = [th.text.strip() for th in header_items]
+            header_texts = [self._get_text_from_tag(th) for th in header_items]
             csvwriter.writerow(header_texts + ["NAC"])
 
             last_row = None
             for tr in rows[1:]:
                 cells = tr.find_all("td")
-                is_new_row = bool(cells[0].text.strip())
+                is_new_row = bool(self._get_text_from_tag(cells[0]))
                 if is_new_row:
                     # Save previous row(s)
                     if last_row:
@@ -89,11 +89,13 @@ class SystemScraper(Scraper):
                             continue
 
                         idx = column_indices[column_name]
-                        val = cells[idx].text.strip() if len(cells)> idx else ""
+                        val = self._get_text_from_tag(cells[idx]) if len(cells)> idx else ""
                         last_row.append(val)
-                    freqs_str = self.__get_freqs_str(cells[column_indices.get("Freqs")])
+                    freqs_start_idx = column_indices.get("Freqs")
+                    freqs_str = self.__get_freqs_str(cells[freqs_start_idx:])
                     last_row.append(freqs_str)
-                    nac = self.__get_nac_from_site_link(cells[column_indices.get("Name")])
+                    site_idx = column_indices.get("Name")
+                    nac = self.__get_nac_from_site_link(cells[site_idx])
                     last_row.append(nac)
                 else:
                     # Same site, just adding more frequencies
@@ -110,7 +112,7 @@ class SystemScraper(Scraper):
         return self.__get_detail_by_label("NAC:", soup)
 
     def __get_freqs_str(self, tags: List[Tag]):
-        texts = map(lambda tag: tag.text.strip(), tags)
+        texts = map(lambda tag: self._get_text_from_tag(tag), tags)
         filtered_texts = filter(lambda text: bool(text), texts)
         return ",".join(filtered_texts)
 
