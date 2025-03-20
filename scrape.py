@@ -14,6 +14,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if "/sid" in args.url:
+        print(f"Scraping {args.url}...")
         scraper = SystemScraper(args.url, args.out_dir)
         scraper.scrape()
         if args.op25:
