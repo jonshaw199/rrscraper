@@ -39,7 +39,10 @@ class Op25Formatter(Formatter):
                         writer.writerow([row["DEC"], text])
 
     def _generate_trunk_file(self):
-        site_idx = self._prompt_for_site()
+        if len(self.sites_and_freqs) == 1:
+            site_idx = 0
+        else:
+            site_idx = self._prompt_for_site()
         site_id, site_name, county, control_freqs, nac = self.sites_and_freqs[site_idx]
         control_channels = ",".join(control_freqs)
         header = [
