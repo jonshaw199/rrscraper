@@ -109,7 +109,10 @@ class SystemScraper(Scraper):
         url = f"{base_url}{link_tag['href']}"
         resp = requests.get(url)
         soup = BeautifulSoup(resp.content, "html.parser")
-        return self.__get_detail_by_label("NAC:", soup)
+        nac = self.__get_detail_by_label("NAC:", soup)
+        if not nac or nac == "N/A":
+            return ""
+        return f"0x{nac}"
 
     def __get_freqs_str(self, tags: List[Tag]):
         texts = map(lambda tag: self._get_text_from_tag(tag), tags)
