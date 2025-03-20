@@ -24,7 +24,7 @@ class Op25Formatter(Formatter):
                     freq[:-1] for freq in row["Freqs"].split(",") if freq.endswith("c")
                 ]
                 sites_and_freqs.append(
-                    [row["Site"], row["Name"], row["County"], freqs, row["NAC"]]
+                    [row["Site"], row["Name"], row.get("County", "Unknown County"), freqs, row["NAC"]]
                 )
         self.sites_and_freqs = sites_and_freqs
 
@@ -41,7 +41,6 @@ class Op25Formatter(Formatter):
     def _generate_trunk_file(self):
         site_idx = self._prompt_for_site()
         site_id, site_name, county, control_freqs, nac = self.sites_and_freqs[site_idx]
-        nac_int = int(nac, 16)
         control_channels = ",".join(control_freqs)
         header = [
             "Sysname",
@@ -58,7 +57,7 @@ class Op25Formatter(Formatter):
             f"{site_name} ({county}; {site_id})",
             control_channels,
             "0",
-            str(nac_int),
+            f"0x{nac}" if nac else "0",
             "cqpsk",
             "tgids.tsv",
             "",

@@ -45,33 +45,61 @@ class SystemScraper(Scraper):
             )
 
     def _get_detail_by_label(self, label: str, soup: BeautifulSoup = None) -> str:
-        return (soup or self.soup).find("th", string=label).find_next("td").text.strip()
+        th_tag = (soup or self.soup).find("th", string=label)
+        if th_tag:
+            td_tag = th_tag.find_next("td")
+            return td_tag.text.strip() if td_tag else ""
+        return ""
 
     def _export_sites_and_freqs(self):
         header = self.soup.find("h3", string="Sites and Frequencies")
         table = header.find_next("table")
         rows = table.find_all("tr")
+        header_items = rows[0].find_all('th')
+
+        # Map column names to their indices
+        column_indices = {}
+        for idx, th in enumerate(header_items):
+            column_name = th.text.strip()
+            if column_name:
+                column_indices[column_name] = idx
+
+        # Open CSV file for writing
         with open(f"{self.out_dir}/sites_and_freqs.csv", "w") as file:
             csvwriter = csv.writer(file)
-            csvwriter.writerow(["RFSS", "Site", "Name", "County", "Freqs", "NAC"])
+
+            # Write the header row, including "NAC"
+            header_texts = [th.text.strip() for th in header_items]
+            csvwriter.writerow(header_texts + ["NAC"])
+
             last_row = None
             for tr in rows[1:]:
                 cells = tr.find_all("td")
                 is_new_row = bool(cells[0].text.strip())
                 if is_new_row:
+                    # Save previous row(s)
                     if last_row:
                         csvwriter.writerow(last_row)
-                    last_row = [
-                        cells[0].text.strip(),
-                        cells[1].text.strip(),
-                        cells[2].text.strip(),
-                        cells[3].text.strip(),
-                        self._get_freqs_str(cells[4:]),
-                        self._get_nac_from_site_link(cells[2]),
-                    ]
+                    
+                    # Start new line; add columns from radio reference, then append NAC
+                    last_row = []
+                    for column_name in column_indices.keys():
+                        # Skip "Freqs" and "NAC" since they are handled separately
+                        if column_name in ["Freqs", "NAC"]:
+                            continue
+
+                        idx = column_indices[column_name]
+                        val = cells[idx].text.strip() if len(cells)> idx else ""
+                        last_row.append(val)
+                    freqs_str = self._get_freqs_str(cells[column_indices.get("Freqs")])
+                    last_row.append(freqs_str)
+                    nac = self._get_nac_from_site_link(cells[column_indices.get("Name")])
+                    last_row.append(nac)
                 else:
-                    freqs_str = self._get_freqs_str(cells[4:])
-                    last_row[4] += f",{freqs_str}"
+                    # Same site, just adding more frequencies
+                    freq_start_idx = column_indices.get("Freqs")
+                    freqs_str = self._get_freqs_str(cells[freq_start_idx:])
+                    last_row[freq_start_idx] += f",{freqs_str}"
             csvwriter.writerow(last_row)
 
     def _get_nac_from_site_link(self, cell: Tag):
