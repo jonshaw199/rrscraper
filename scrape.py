@@ -5,7 +5,7 @@ from systemscraper import SystemScraper
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Scrape Radio Reference and optionally export for OP25.",
+        description="Scrape radioreference.com and optionally export for OP25.",
         epilog="Example:\n  python scrape.py --url https://www.radioreference.com/db/sid/6253 --op25",
     )
     parser.add_argument("-u", "--url", help="Radio Reference URL", required=True)
