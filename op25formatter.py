@@ -19,12 +19,13 @@ class Op25Formatter(Formatter):
         with open(f"{self._in_dir}/sites_and_freqs.csv", newline="") as file:
             csvreader = csv.DictReader(file)
             for row in csvreader:
+                freqs = row["Freqs"].split(",")
                 # Get only control channels (ending in "c")
-                freqs = [
-                    freq[:-1] for freq in row["Freqs"].split(",") if freq.endswith("c")
+                control_freqs = [
+                    freq[:-1] for freq in freqs if freq.endswith("c")
                 ]
                 sites_and_freqs.append(
-                    [row["Site"], row["Name"], row.get("County", "Unknown County"), freqs, row["NAC"]]
+                    [row["Site"], row["Name"], row.get("County", "Unknown County"), control_freqs or freqs, row["NAC"]]
                 )
         self.sites_and_freqs = sites_and_freqs
 
