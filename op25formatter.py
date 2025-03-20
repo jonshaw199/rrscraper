@@ -60,7 +60,7 @@ class Op25Formatter(Formatter):
             f"{site_name} ({county}; {site_id})",
             control_channels,
             "0",
-            f"0x{nac}" if nac else "0",
+            f"0x{nac}" if nac and nac != "N/A" else "0",
             "cqpsk",
             "tgids.tsv",
             "",
