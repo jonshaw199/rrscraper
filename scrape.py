@@ -1,7 +1,9 @@
 import argparse
 
+from conventionalscraper import ConventionalScraper
 from op25formatter import Op25Formatter
 from systemscraper import SystemScraper
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -19,6 +21,11 @@ if __name__ == "__main__":
         scraper.scrape()
         if args.op25:
             Op25Formatter(scraper.out_dir).format()
+        print(f"Exported to {scraper.out_dir}")
+    elif "ctid" in args.url:
+        print(f"Scraping {args.url}...")
+        scraper = ConventionalScraper(args.url, args.out_dir)
+        scraper.scrape()
         print(f"Exported to {scraper.out_dir}")
     else:
         raise ValueError("Can't scrape this URL")

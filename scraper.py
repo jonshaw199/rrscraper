@@ -29,3 +29,6 @@ class Scraper:
         # No shallow text — fall back to all text (deep)
         deep_text = tag.get_text(strip=True)
         return deep_text
+
+    def _to_filename(self, text: str) -> str:
+        return "".join(x for x in text if x.isalnum())
