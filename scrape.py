@@ -22,7 +22,7 @@ if __name__ == "__main__":
         if args.op25:
             Op25Formatter(scraper.out_dir).format()
         print(f"Exported to {scraper.out_dir}")
-    elif "ctid" in args.url:
+    elif "/ctid" in args.url or "/aid" in args.url:
         print(f"Scraping {args.url}...")
         scraper = ConventionalScraper(args.url, args.out_dir)
         scraper.scrape()
