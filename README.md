@@ -6,9 +6,9 @@ A simple Python script to scrape data from radioreference.com and optionally exp
 ## Features
 
 - Scrapes Radio Reference data for a given URL and exports the raw data in CSV format
-  - ~Only supports systems for now (URLs with `/sid`)~
-  - Now supports scraping county pages (URLs with `/ctid`) and agency pages (URLs with `/aid`) too
+  - Can give it a system URL (`/sid`), county URL (`/ctid`), or agency URL (`/aid`); see examples below
 - Optionally formats and exports TSV data for use with [OP25](https://github.com/boatbod/op25)
+  - Formatting for other applications will be added as needed; any and all contributions welcome
 
 ## Requirements
 
