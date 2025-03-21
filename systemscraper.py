@@ -55,7 +55,7 @@ class SystemScraper(Scraper):
         header = self._soup.find("h3", string="Sites and Frequencies")
         table = header.find_next("table")
         rows = table.find_all("tr")
-        header_items = rows[0].find_all('th')
+        header_items = rows[0].find_all("th")
 
         # Map column names to their indices
         column_indices = {}
@@ -80,7 +80,7 @@ class SystemScraper(Scraper):
                     # Save previous row(s)
                     if last_row:
                         csvwriter.writerow(last_row)
-                    
+
                     # Start new line; add columns from radio reference, then append NAC
                     last_row = []
                     for column_name in column_indices.keys():
@@ -89,7 +89,11 @@ class SystemScraper(Scraper):
                             continue
 
                         idx = column_indices[column_name]
-                        val = self._get_text_from_tag(cells[idx]) if len(cells)> idx else ""
+                        val = (
+                            self._get_text_from_tag(cells[idx])
+                            if len(cells) > idx
+                            else ""
+                        )
                         last_row.append(val)
                     freqs_start_idx = column_indices.get("Freqs")
                     freqs_str = self.__get_freqs_str(cells[freqs_start_idx:])
@@ -128,7 +132,7 @@ class SystemScraper(Scraper):
             table = header.find_next("table")
             rows = table.find_all("tr")
             with open(
-                f"{self.out_dir}/talkgroups/{to_filename(header_text)}.csv", "w"
+                f"{self.out_dir}/talkgroups/{self._to_filename(header_text)}.csv", "w"
             ) as file:
                 csvwriter = csv.writer(file)
                 csvwriter.writerow(
@@ -136,9 +140,5 @@ class SystemScraper(Scraper):
                 )
                 for tr in rows[1:]:
                     cells = tr.find_all("td")
-                    cell_vals = map(lambda cell: cell.text.strip(), cells)
+                    cell_vals = map(lambda cell: self._get_text_from_tag(cell), cells)
                     csvwriter.writerow(cell_vals)
-
-
-def to_filename(text: str) -> str:
-    return "".join(x for x in text if x.isalnum())
