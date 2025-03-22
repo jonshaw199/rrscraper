@@ -36,22 +36,27 @@ class ConventionalScraper(Scraper):
             os.mkdir(f"{self.out_dir}/freqs/{dir_name}")
             headers = group.find_all("h5")
             for header in headers:
-                table = header.find_next("table")
-                if self.__is_scrapable(table):
-                    header_text = self._get_text_from_tag(header)
-                    filename = self._to_filename(header_text)
-                    rows = table.find("tbody").find_all("tr")
-                    with open(
-                        f"{self.out_dir}/freqs/{dir_name}/{filename}.csv", "w"
-                    ) as file:
-                        writer = csv.writer(file)
-                        writer.writerow(header_row)
-                        for row in rows:
-                            cells = row.find_all("td")
-                            cell_texts = map(
-                                lambda cell: self._get_text_from_tag(cell), cells
-                            )
-                            writer.writerow(cell_texts)
+                # Find the table we care about
+                for header_sibling in header.find_next_siblings():
+                    if header_sibling.name in ["h4", "h5"]:
+                        break
+                    if self.__is_scrapable(header_sibling):
+                        table = header_sibling.find("table")
+                        header_text = self._get_text_from_tag(header)
+                        filename = self._to_filename(header_text)
+                        rows = table.find("tbody").find_all("tr")
+                        with open(
+                            f"{self.out_dir}/freqs/{dir_name}/{filename}.csv", "w"
+                        ) as file:
+                            writer = csv.writer(file)
+                            writer.writerow(header_row)
+                            for row in rows:
+                                cells = row.find_all("td")
+                                cell_texts = map(
+                                    lambda cell: self._get_text_from_tag(cell), cells
+                                )
+                                writer.writerow(cell_texts)
+                        break
 
     # We currently expect the frequency table to be in a predictable format with the same 8 columns
     def __is_scrapable(self, tag: bs4.Tag):
