@@ -2,7 +2,7 @@ import bs4
 import csv
 import os
 
-from scraper import Scraper
+from .scraper import Scraper
 
 
 class ConventionalScraper(Scraper):

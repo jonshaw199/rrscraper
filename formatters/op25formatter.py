@@ -1,7 +1,7 @@
 import csv
 import os
 
-from formatter import Formatter
+from .formatter import Formatter
 
 
 class Op25Formatter(Formatter):

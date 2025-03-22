@@ -4,7 +4,7 @@ import os
 import requests
 from typing import List
 
-from scraper import Scraper
+from .scraper import Scraper
 
 base_url = "https://www.radioreference.com"
 
