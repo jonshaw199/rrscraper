@@ -1,7 +1,7 @@
 
 # RadioReference Scraper
 
-A simple Python script to scrape data from radioreference.com and optionally export it for [OP25](https://github.com/boatbod/op25).
+Generate CSV/TSV files from a Radio Reference URL
 
 ## Features
 
