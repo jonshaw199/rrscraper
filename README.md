@@ -76,18 +76,24 @@ This command will scrape the specified system from Radio Reference and export th
 #### Scraping a county:
 
 ```bash
-python scrape.py --url https://www.radioreference.com/db/browse/ctid/211  --chirp
+python scrape.py --url https://www.radioreference.com/db/browse/ctid/211
 ```
 
-This command will scrape conventional frequencies for the given county URL and export the data in Chirp Next format.
+This command will scrape frequencies for the given county URL.
+
+```bash
+python scrape.py --url https://www.radioreference.com/db/browse/ctid/211 --chirp
+```
+
+This command will scrape frequencies for the given county URL and export the data in Chirp Next format.
 
 #### Scraping an agency:
 
 ```bash
-python scrape.py --url https://www.radioreference.com/db/aid/9210 --chirp
+python scrape.py --url https://www.radioreference.com/db/aid/9210
 ```
 
-This command will scrape conventional frequencies for the given agency URL and export the data in Chirp Next format.
+This command will scrape conventional frequencies for the given agency URL.
 
 ## License
 
