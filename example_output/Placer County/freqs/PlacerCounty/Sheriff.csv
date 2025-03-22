@@ -1,0 +1,6 @@
+Frequency,License,Type,Tone,Alpha Tag,Description,Mode,Tag
+160.545,WNPZ854,RM,131.8 PL,PCSO West,Dispatch West (patched with P25 system),FMN,Law Dispatch
+161.505,WNPZ854,RM,136.5 PL,PCSO East,Dispatch East (patched with P25 system),FMN,Law Dispatch
+160.665,WNVZ343,BM,136.5 PL,PCSO Adm East,Admin East,FMN,Law Talk
+160.665,WNVZ343,M,,PCSO Courts,Court Services (various DCS tones),FMN,Law Tac
+155.190,KNJZ354,RM,420 NAC,PCSO Jail,Jail (Auburn),P25,Corrections

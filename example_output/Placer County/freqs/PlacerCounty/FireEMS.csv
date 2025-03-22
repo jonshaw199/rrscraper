@@ -1,0 +1,17 @@
+Frequency,License,Type,Tone,Alpha Tag,Description,Mode,Tag
+154.355,KJR202,RM,107.2 PL,PlacerCo FD Disp,Fire Dispatch (West),FMN,Fire Dispatch
+156.240,WPIS457,RM,110.9 PL,PlacerCo FD Cmd,Fire Command (XPL CMD),FMN,Fire-Talk
+154.175,KTS763,RM,118.8 PL,PlacerCo FD T1,Fire Tac 1 (patched with Roseville FD Tac 4),FMN,Fire-Tac
+155.025,WQHC490,RM,107.2 PL,PlacerCo FD T2,Fire Tac 2 (shared as Lincoln Police Tac 3),FMN,Fire-Tac
+154.010,WPMB620,M,107.2 PL,PlacerCo FD T3,Fire Tac 3,FMN,Fire-Tac
+158.805,WNEB547,M,127.3 PL,PlacerCo FD T4,Fire Tac 4,FMN,Fire-Tac
+154.235,WPDB675,M,107.2 PL,PlacerCo FD T5,Fire Tac 5,FMN,Fire-Tac
+155.400,WNQN942,M,107.2 PL,PlacerCo FD T6,Fire Tac 6,FMN,Fire-Tac
+154.130,WPNP952,M,107.2 PL,PlacerCo FD T7,Fire Tac 7,FMN,Fire-Tac
+154.070,WPGB795,M,103.5 PL,PlacerCo FD T8,Fire Tac 8,FMN,Fire-Tac
+153.890,WPGB795,M,107.2 PL,PlacerCo FD T9,Fire Tac 9,FMN,Fire-Tac
+154.205,WPGB795,M,103.5 PL,PlacerCo FD T10,Fire Tac 10,FMN,Fire-Tac
+154.400,WPMF967,RM,94.8 PL,PlacerCo S J-TAC,Joint Powers Authority Tac (Truckee/Tahoe),FMN,Fire-Tac
+154.415,WPPC477,RM,103.5 PL,N Tahoe FD Tac 6,North Tahoe Fire District Tac 6,FMN,Fire-Talk
+152.3225,WQII599,RM,16 RAN,AMR Placer,AMR Placer County Primary Operations,NXDN48,EMS Dispatch
+463.075,,RM,186.2 PL,PLACER CO MED4,Sutter Roseville Reports,FMN,Hospital
